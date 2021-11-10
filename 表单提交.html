@@ -19,7 +19,8 @@
 <body>
     <div class="wrap">
         <h1>用户登录</h1>
-        <form action="https://www.baidu.com">
+        <form action="https://www.baidu.com" id="myForm">
+            <input type="hidden">
             <div class="row">
                 用户名:
                 <input type="text" name="username" placeholder="请输入用户名">
@@ -30,7 +31,7 @@
             </div>
             <div  class="row">
 <!--                    当form聚焦时，按回车可自动提交表单的三种方式-->
-<!--                <input type="submit" value="提交表单">-->
+                <input type="submit" value="提交表单">
 <!--                    button标签默认type是submit-->
 <!--                <button>提交表单</button>-->
 <!--                <input type="image" src="images/submit.png">-->
@@ -40,3 +41,20 @@
 
 </body>
 </html>
+<script>
+    let myForm = document.getElementById('myForm')
+    myForm.addEventListener('submit', event => {
+		if(myForm.username.value && myForm.password.value) {
+			alert('验证通过')
+        } else {
+			alert('验证不通过')
+            event.preventDefault();
+		}
+    })
+
+    window.onload = function() {
+		debugger;
+		// 并不会报错
+		myForm.elements[0].focus();
+    }
+</script>
