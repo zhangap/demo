@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    // let observer = new MutationObserver(records => {
+	//     console.log('DOM  was changed')
+	//     console.log(records)
+    // })
+    //
+    // observer.observe(document.body, {attributes: true})
+    //
+    // setTimeout(() => {
+	//     console.log('set height')
+	// 	document.body.style.height = '500px';
+    // }, 3000)
+    // setTimeout(() => {
+	//     console.log('set color')
+	// 	document.body.style.backgroundColor = '#ccc';
+    // }, 2000)
+    // setTimeout(() => {
+	// 	document.body.setAttribute('customAttr', 'hello')
+    // },1000)
+
+    // let observer = new MutationObserver(mutationRecords => {
+	//     console.log(mutationRecords.map((x) => x.oldValue))
+    // })
+    // document.body.innerText = 'firstChild';
+    // observer.observe(document.body.firstChild, {characterDataOldValue: true})
+    // setTimeout(() => {
+	// 	document.body.firstChild.textContent = 'hello world1'
+    // },2000)
+    // setTimeout(() => {
+	// 	document.body.firstChild.textContent = 'hello world2'
+    // },4000)
+    // setTimeout(() => {
+	// 	document.body.innerText = 'hello world3'
+    // },6000)
+    // setTimeout(() => {
+	// 	document.body.firstChild.textContent = 'hello world4'
+    // })
+
+    // document.body.innerHTML = ''
+    // let observer = new MutationObserver(records => {
+	//     console.log(records)
+    // })
+    // observer.observe(document.body, {childList: true})
+    // document.body.appendChild(document.createElement('div'))
+    // setTimeout(() => {
+	// 	document.body.removeChild(document.body.firstChild)
+    // }, 2000)
+    //
+    // setTimeout(() => {
+	// 	document.body.appendChild(document.createElement('div'))
+    //     document.body.appendChild(document.createElement('span'))
+    //     document.body.insertBefore(document.body.lastChild, document.body.firstChild)
+    // }, 4000)
+    console.log('移除子树')
+    // document.body.innerHTML = ''
+
+    let observer = new MutationObserver(records => {
+	    console.log(records)
+    })
+
+    let rootNode = document.createElement('div')
+    let childNode = document.createElement('span')
+
+    document.body.appendChild(rootNode)
+    rootNode.appendChild(childNode)
+
+    // observer.observe(rootNode, {attributes: true, subtree: true})
+    observer.observe(rootNode, {attributes: true, subtree: true });
+
+    document.body.insertBefore(childNode, rootNode)
+    childNode.className = 'hello'
+    setTimeout(() => {
+		childNode.className = 'hello'
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

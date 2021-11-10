@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // const target = {
+    //     foo: 'bar'
+    // }
+    // const handler = {
+    //     // get() {
+    //     //     return 'handler override'
+    //     // }
+    //     // get() {
+    //     //     return Reflect.get(...arguments)
+    //     // }
+    //     get: Reflect.get
+    // }
+    // const  proxy = new Proxy(target, handler)
+    // console.log(proxy.foo)
+    // console.log(target.foo);
+
+    // const target = {
+    //     foo: 'bar',
+    //     baz: 'qux'
+    // }
+    // const handler = {
+    //     get(trapTarget, property, receiver) {
+    //         let decoration = '';
+    //         if(property === 'foo') {
+    //             decoration = '!!!'
+    //         }
+    //         return Reflect.get(...arguments) + decoration
+    //     }
+    // }
+    // const proxy = new Proxy(target, handler)
+    // console.log(proxy.foo);
+    // console.log(target.foo);
+    // console.log(proxy.baz);
+    // console.log(target.baz);
+
+    // console.log('-----------------代理两个代理-------------------')
+
+    // const target2 = {
+    //     foo: 'bar'
+    // }
+    // const firstProxy = new Proxy(target2, {
+    //     get() {
+    //         console.log('first proxy');
+    //         return Reflect.get(...arguments)
+    //     }
+    // })
+    // const secondProxy = new Proxy(firstProxy, {
+    //     get() {
+    //         console.log('second proxy');
+    //         return Reflect.get(...arguments)
+    //     }
+    // })
+    // console.log(secondProxy.foo);
+
+
+    // const wm = new WeakMap()
+    // class User{
+    //     constructor(name, age) {
+    //        wm.set(this, name)
+    //        this.age = age;
+    //     }
+    //     set name(name) {
+    //         wm.set(this, name)
+    //     }
+    //     get name() {
+    //         return wm.get(this)
+    //     }
+    // }
+
+    // const user = new User('zap', 31)
+    // console.log(user.name);
+    // const proxy = new Proxy(user, {})
+    // console.log(proxy.name);
+
+    // const target = new Date();
+    // const proxy = new Proxy(target, {})
+    // console.log(proxy instanceof Date);
+    // console.log(proxy.getDate())
+
+    const myTarget = {
+        name: 'zap',
+        age: 30
+    }
+    const proxy = new Proxy(myTarget, {
+        ownKeys(target) {
+            console.log('ownKeys()');
+            return Reflect.ownKeys(...arguments)
+        }
+    })
+
+    console.log(Object.keys(proxy))
+
+</script>

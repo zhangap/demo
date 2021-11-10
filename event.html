@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 400px;
+            height:400px;
+            background: #ccc;
+            margin:0;
+        }
+        #div2{
+            width:200px;
+            height:200px;
+            background: red;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        div1
+        <div id="div2">
+            div2
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+    window.onload = function() {
+        var oDiv1 = document.getElementById('div1');
+        var oDiv2 = document.getElementById('div2');
+        var useCapture = false;
+        oDiv1.addEventListener('click', () => {
+            console.log('div1');
+        }, useCapture);
+        oDiv2.addEventListener('click', () => {
+            console.log('div2');
+        }, useCapture);
+    }
+</script>

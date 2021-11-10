@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
+<script>
+    window.onload = function() {
+		let oBox = document.getElementById('box')
+
+        let text = document.createTextNode('中国')
+        text.appendData('人民！！！')
+        oBox.appendChild(text)
+    }
+</script>

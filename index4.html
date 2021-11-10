@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    var str = 'abcdef';
+    var str2 = new String(str);
+
+    function newToString(){
+        return 'hello world' ;
+    };
+
+    function func(val) {
+        val.toString = newToString;
+    }
+
+    func(str);
+    console.log(str);
+
+    func(str2);
+    console.log(String(str2));
+</script>

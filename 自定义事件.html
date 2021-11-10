@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="模拟点击事件" id="btn2" onclick="triggerHandle()">
+<input type="button" value="btn1" id="btn1" onclick="clickHandle()">
+<hr>
+<input type="button" value="模拟键盘事件" onclick="triggerKeyBoardHandle()">
+<textarea id="txtBox"></textarea>
+<hr>
+<input type="button" value="自定义dom事件" onclick="triggerDomHandle()">
+<div id="box" style="width:400px;height:100px;background: #ccc;"></div>
+</body>
+</html>
+<script>
+    let btn1 = document.getElementById('btn1');
+
+    function triggerHandle(){
+		 let event = document.createEvent('MouseEvent');
+		 event.initMouseEvent('click', true, true, document.defaultView, 0,0,0,0,0, false, false,false,false,0,null);
+		 btn1.dispatchEvent(event);
+    }
+
+	function clickHandle() {
+		alert('btn1 is clicked!!!');
+    }
+
+	function triggerKeyBoardHandle() {
+		let txtBox = document.getElementById('txtBox');
+		let eventObj = null;
+
+		txtBox.addEventListener('keypress', function(ev) {
+			console.log('监听的事件被触发...，但是文本框中不会有内容。。。',ev)
+        })
+
+		// 按照 DOM3 的方式创建 event 对象
+		if (document.implementation.hasFeature("KeyboardEvents", "3.0")) {
+			eventObj = document.createEvent("KeyboardEvent");
+			// 初始化 event 对象
+			eventObj.initKeyboardEvent("keypress", true, true, document.defaultView, "a", 0, "Shift", 0);
+		}
+// 触发事件
+		txtBox.dispatchEvent(eventObj);
+
+    }
+
+	function triggerDomHandle() {
+		let box = document.getElementById('box'),
+          event;
+		box.addEventListener('myEvent', function(event) {
+			this.innerHTML = '自定义事件触发' + event.detail;
+        })
+		if (document.implementation.hasFeature("CustomEvents", "3.0")) {
+			event = document.createEvent('CustomEvent')
+            event.initCustomEvent('myEvent', true, false, 'hello world!!!');
+			box.dispatchEvent(event);
+        }
+
+    }
+
+</script>

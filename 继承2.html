@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    
+// class People{
+//   constructor(name,age) {
+//     this.name = name;
+//     this.age = age;
+//   }
+//   sayName(){
+//     console.log(this.name)
+//   }
+// }
+
+// class Person extends People {
+//   constructor(name,age, address) {
+//     super(name,age);
+//     this.address = address;
+//   }
+//   sayAge() {
+//     console.log(this.age)
+//   }
+//   sayAddress(){
+//     console.log(this.address)
+//   }
+// }
+
+
+// var p = new Person('zhangaiping', 31, '湖北秭归')
+// p.sayName();
+// p.sayAge();
+// p.sayAddress();
+
+
+// class AbstractClass{
+//     constructor(name, age) {
+//         console.log(new.target)
+//         if(new.target === AbstractClass) {
+//             throw new Error('抽象类不能被实例化')
+//         }
+//         this.name = name;
+//         this.age = age;
+//     }
+//     sayName() {
+//         console.log(this.name);
+//     }
+//     sayAge() {
+//         console.log(this.age);
+//     }
+// }
+
+// class SubClass extends AbstractClass {
+// }
+
+// let  sub = new SubClass('zap', 31)
+// sub.sayName()
+// sub.sayAge();
+
+// //抛异常
+// let abs = new AbstractClass('abs',1)
+
+
+
+class AbstractClass {
+    constructor() {
+        if(typeof this.init !== 'function') {
+            throw new Error('子类必须定义init方法')
+        }
+    }
+}
+class Sub1 extends AbstractClass {
+    init() {
+    }
+}
+class Sub2 extends AbstractClass {
+    hello(){
+
+    }
+}
+// 可以正常实例化
+let sub1 = new Sub1();
+// 实例化时会抛出异常
+let sub2 = new Sub2();
+
+</script>

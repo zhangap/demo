@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    
+    function inheritPrototype(subType, superType){
+        let F = function(){}
+        F.prototype = superType.prototype
+        let prototype = new F()
+        prototype.constructor = subType
+        subType.prototype = prototype
+    }
+
+    function SuperType(name) {
+        this.name = name;
+        this.colors = ['red', 'blue','green'];
+    }
+    SuperType.prototype.sayColor = function(){
+        console.log(this.colors)
+    }
+
+    function SubType(name, age){
+        //调用父类方法
+       SuperType.call(this,name);
+        this.age = age;
+    }
+    inheritPrototype(SubType,SuperType);
+    SubType.prototype.sayAge = function(){
+        console.log(this.age)
+    }
+
+    // 父类相关方法的调用
+    let s1 = new SuperType('super')
+    console.log(s1.name)
+    s1.sayColor();
+    console.log('-----------------')
+    // 子类方法的调用
+    let s2 = new SubType('sub', 32)
+    // 修改子类继承的属性
+    s2.colors.push('white');
+    s2.sayColor();
+    s2.sayAge();
+    console.log('---------------')
+    // 看看修改后的属性是否影响父类的
+    s1.sayColor();
+</script>

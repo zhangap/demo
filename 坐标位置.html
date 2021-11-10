@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            width:100%;
+            height:100%;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    document.body.addEventListener('click', function(event) {
+	    console.log(event.clientX, event.clientY)
+        console.log(event.screenX, event.screenY)
+
+        let keys = new Array();
+		if(event.shiftKey) {
+			keys.push('shift')
+        }
+		if(event.ctrlKey) {
+			keys.push('ctrl')
+        }
+		if(event.altKey) {
+			keys.push('alt')
+        }
+		if(event.metaKey) {
+			keys.push('meta')
+        }
+	    console.log(`keys:${keys.join(',')}`)
+    })
+</script>
+

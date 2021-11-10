@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>outer start</div>
+    <div class="box">
+        <span>inner start</span>
+        <span>inner end</span>
+    </div>
+    <div>outer end</div>
+</body>
+</html>
+<script>
+	let box = document.querySelector('.box')
+	// const something = 'this is hello world!!!'
+	// box.innerHTML = `<p>${something}</p>`
+	// box.insertAdjacentHTML('beforebegin', '<span>这个是被插入元素</span>');
+	// box.insertAdjacentHTML('afterend', '<span>这个是被插入元素</span>');
+	box.insertAdjacentHTML('afterbegin', '<span>这个是被插入元素</span>');
+	// box.insertAdjacentHTML('beforeend', '<span>这个是被插入元素</span>');
+</script>

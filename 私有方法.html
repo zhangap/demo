@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Person(name) {
+        this.getName = function() {
+            return name
+        }
+        this.setName = function(value) {
+            name = value
+        }
+    }
+    let p = new Person('zap')
+    console.log(p.getName())
+    p.setName('tengri')
+    console.log(p.getName())
+</script>

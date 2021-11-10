@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+      .box {
+          width: 100px;
+          height:100px;
+          background:#ccc;
+          margin-top:100px;
+      }
+      .wrapper {
+          position: absolute;
+          top:100px;
+          border: 1px solid red;
+          /*position: relative;*/
+          height:500px;
+      }
+  </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="box"></div>
+    </div>
+</body>
+</html>
+<script>
+    // 获取元素的在页面中的偏移量
+    function getElementLeft(element) {
+		let actualLeft = element.offsetLeft
+        let current = element.offsetParent
+        while(current !== null) {
+			actualLeft += current.offsetLeft
+            current = current.offsetParent
+        }
+		return actualLeft
+    }
+
+	function getElementTop(element) {
+		let actualTop = element.offsetTop
+        let current = element.offsetParent;
+		while (current !== null) {
+			actualTop += current.offsetTop
+            current = current.offsetParent
+        }
+		return actualTop
+    }
+</script>

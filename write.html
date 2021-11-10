@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .txt {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+  <div class="box">
+      <p1>hello</p1>
+      <button onclick="writeHandle()">write</button>
+      <div class="txt" dir="rtl">
+          中华人民共和国中央人民政府。
+      </div>
+  </div>
+</body>
+</html>
+<script>
+    function writeHandle() {
+		document.write(`<strong>${(new Date()).toLocaleDateString()}</strong>`)
+    }
+</script>

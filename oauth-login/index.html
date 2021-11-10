@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扫码登录</title>
+    <script src="./js/jweixin-sgccigw-1.0.0.js"></script>
+    <script src="./js/wwLogin-1.0.0.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+</html>
+<script>
+    window.onload = function() {
+       if(typeof window.WwLogin === 'function') {
+           login();
+       } else {
+           console.error(window.WwLogin)
+       }
+
+       function login() {
+        window.WwLogin({
+            id: 'app',
+            appid: 'ww445f8033443a14aa',
+            agentid: '1000718',
+            redirect_uri: location.href
+        })
+       }
+    }
+</script>

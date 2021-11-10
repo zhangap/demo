@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // console.log(typeof fn)
+    // function fn() {}
+    // var fn = 'hello'
+    // console.log(typeof fn);
+
+    // console.log(typeof sum)
+    // sum(10,1)
+    // var sum = function(num1, num2) {
+    //     return num1 + num2;
+    // }
+
+    function fn1 () {
+        this.Myname = 'fn1'
+        setTimeout(() => {
+            console.log(this.Myname);
+        })
+    }
+    function fn2() {
+        this.Myname = 'fn2';
+        setTimeout(function() {
+            console.log(this.Myname);
+        })
+    }
+    new fn1()
+    new fn2()
+
+    function Person() {
+        console.log(new.target);
+    }
+    Person()
+    new Person();
+</script>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div id="div1">
+    <p>
+        <b>hello</b> world!
+    </p>
+    <ul>
+      <li>List item 1</li>
+      <li>List item 2</li>
+      <li>List item 3</li>
+    </ul>
+      <div id="level1">
+          level1
+          <div id="level2">
+              level2
+              <div id="level3">level3</div>
+          </div>
+      </div>
+  </div>
+</body>
+</html>
+<script>
+  let div = document.getElementById('div1');
+  // let iterator = document.createNodeIterator(div, NodeFilter.SHOW_ELEMENT, null, false);
+  //
+  // let node  = iterator.nextNode()
+  // while (node !== null) {
+	//   // 输出所有的标签名称
+	//   console.log(node.tagName, node.id)
+  //     node = iterator.nextNode()
+  // }
+  let filter = node => {
+	  return node.tagName.toLowerCase() == 'li' ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP
+  }
+  let walker = document.createTreeWalker(div, NodeFilter.SHOW_ELEMENT, filter, false)
+  let node = walker.nextNode()
+  while (node !== null) {
+    // 输出所有的标签名称
+    console.log(node.tagName, node.id)
+      node = walker.nextNode()
+  }
+</script>

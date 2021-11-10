@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数相关功能</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+   //  function foo() {
+   //
+   //  }
+   //  let bar = function() {}
+   //  let baz = () => {}
+   //  console.log(foo.name)
+   //  console.log(bar.name)
+   //  console.log(baz.name)
+   //  console.log((() =>{}).name)
+   //  console.log((new Function()).name)
+   //
+   //  console.log(foo.bind(null).name)
+   //
+   //
+   //  let dog = {
+   //      years: 1,
+   //      get age() {
+   //          return this.years;
+   //      },
+   //      set age(newAge) {
+   //          this.years = newAge
+   //      }
+   //  }
+   // let propertyDescriptor = Object.getOwnPropertyDescriptor(dog, 'age')
+   //  console.log(propertyDescriptor)
+   //  console.log(propertyDescriptor.get.name)
+   //  console.log(propertyDescriptor.set.name)
+
+   // function sayHi(name, message) {
+   //     console.log(`hello${name}${message}`)
+   //     console.log(arguments)
+   // }
+   // sayHi('zhangaiping', 31, '湖北秭归')
+
+
+   // function makeKing(name = 'zap', num = name){
+   //     return   `king-${name}:${num}`
+   // }
+   //
+   // console.log(makeKing())
+
+   function createPerson(name='zap', age = defaultAge) {
+       let defaultAge = 3
+       return  `你好，${name}。你今年${age}岁了！！！`
+   }
+
+   // 这样是没有问题的
+   console.log(createPerson('张三丰', 100))
+   // Uncaught ReferenceError: defaultAge is not defined
+   console.log(createPerson('张无忌'))
+
+
+
+
+</script>

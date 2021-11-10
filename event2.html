@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="click me!" id="myBtn">
+<input value="Try selecting some text in this element." id="myInput">
+<p id="log"></p>
+</body>
+</html>
+<script>
+    let oBtn = document.getElementById('myBtn');
+	oBtn.addEventListener('click', () => {
+		console.log('hello', this.id)
+		console.log(this)
+    })
+    oBtn.addEventListener('click', function(e){
+	    console.log(e, this.id);
+    })
+
+   const log = document.getElementById('log');
+	const input = document.querySelector('#myInput');
+	input.addEventListener('select', function(event){
+		console.log(event)
+		const selection = event.target.value.substring(event.target.selectionStart, event.target.selectionEnd);
+		log.textContent = `You selected: ${selection}`;
+    })
+</script>
