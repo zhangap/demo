@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本解码</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // const textDecoder = new TextDecoder();
+	// // const encodeText = Uint8Array.of(102,111,111);
+	// const encodeText = Uint32Array.of(102,111,111);
+	// const decodeText = textDecoder.decode(encodeText);
+    // console.log(decodeText)
+    console.log('多字符解码...');
+
+	const textDecoder = new TextDecoder('utf-16');
+	const encodeText = Uint16Array.of(102,111,111);
+	const decodeText = textDecoder.decode(encodeText);
+    console.log(decodeText)
+
+</script>

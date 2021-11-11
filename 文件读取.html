@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:800px;
+            height:400px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="file">
+    <div class="box"></div>
+
+</body>
+</html>
+<script>
+    let file = document.getElementById('file');
+	file.addEventListener('change', event => {
+		let files = event.target.files;
+		let type = 'default';
+		let reader = new FileReader();
+		let file = files[0]
+
+		if(/image/.test(file.type)) {
+			console.log('图片文件')
+            type = 'image'
+            reader.readAsDataURL(file)
+        } else {
+			console.log('文本文件')
+            type = 'text'
+            reader.readAsText(file)
+        }
+
+		reader.onerror = () => {
+			console.log('error', reader.error.code)
+        }
+		reader.onload = () => {
+			// console.log(reader.result)
+            let html
+            if(type === 'image') {
+				html = `<img src="${reader.result}">`
+            } else {
+				html = reader.result
+            }
+			document.querySelector('.box').innerHTML = html;
+        }
+    })
+</script>
