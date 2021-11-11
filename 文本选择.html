@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择文本</title>
+</head>
+<body>
+<input type="text" id="myInput" value="初始值">
+<input type="button" onclick="setFocus()" value="设置焦点">
+</body>
+</html>
+<script>
+    function setFocus() {
+		let myInput = document.getElementById('myInput');
+		myInput.focus();
+        myInput.select();
+    }
+</script>

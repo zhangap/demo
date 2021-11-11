@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="https://www.baidu.com" id="myForm">
+    <div class="row">
+        用户名:
+        <input type="text" name="username" placeholder="请输入用户名" required>
+    </div>
+    <div  class="row">
+        密&nbsp;&nbsp;码:
+        <input type="password" name="password" placeholder="请输入密码"/>
+    </div>
+    <div class="row">
+        <input type="number">
+    </div>
+    <div  class="row">
+        <input type="button" value="测试表单元素是否正确" onclick="testHandle()">
+    </div>
+</form>
+
+</body>
+</html>
+<script>
+    function testHandle() {
+		let myForm = document.getElementById('myForm')
+	    console.log('检测结果',myForm.elements[0].checkValidity())
+
+    }
+</script>
