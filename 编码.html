@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // 第一种编码方式
+  // const textEncoder = new TextEncoder();
+  // const decodeText = 'foo';
+  // const encodeText = textEncoder.encode(decodeText)
+  // console.log(encodeText);
+
+  // 第二种编码方式、要接收一个encodeInto方法
+    const textEncoder2 = new TextEncoder();
+	const fooArr = new Uint8Array(3);
+	const barArr = new Uint8Array(2);
+
+	const fooResult = textEncoder2.encodeInto('foo', fooArr);
+	const barResult = textEncoder2.encodeInto('bar', barArr);
+    console.log(fooArr)
+    console.log(fooResult);
+    console.log('----------------------')
+    console.log(barArr)
+    console.log(barResult);
+    // encode()要求分配一个新的 Unit8Array，encodeInto()则不需要。对于追求性能的应用，这个
+    // 差别可能会带来显著不同。
+</script>
