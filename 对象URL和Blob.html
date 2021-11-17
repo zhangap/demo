@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象URL和Blob</title>
+    <style>
+        .box{
+            width:800px;
+            height:400px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="file">
+    <div class="box"></div>
+</body>
+</html>
+<script>
+  window.onload = function() {
+	  let file = document.getElementById('file')
+      file.addEventListener('change', event => {
+		  let file = event.target.files[0]
+          let url = window.URL.createObjectURL(file);
+		  if(url && /image/.test(file.type)) {
+			  document.querySelector('.box').innerHTML = `<img src="${url}">`;
+          }
+
+		  setTimeout(() => {
+			  debugger
+              // 无效
+			  window.URL.revokeObjectURL(url);
+          }, 5000)
+      })
+  }
+
+</script>

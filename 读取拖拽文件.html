@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>读取拖拽文件</title>
+    <style>
+        .box {
+            width:200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            line-height: 200px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">将文件拖放到此处</div>
+</body>
+</html>
+<script>
+    let box = document.getElementById('box')
+    box.addEventListener('dragenter', handle, false)
+    box.addEventListener('dragover', handle, false)
+    box.addEventListener('drop', handle, false)
+
+    function handle(event) {
+		event.preventDefault();
+		if(event.type === 'drop') {
+			let file = event.dataTransfer.files[0];
+			console.log(file)
+            var reader = new FileReader()
+            reader.onload = function() {
+	            console.log(reader.result)
+            }
+			reader.readAsText(file);
+        }
+    }
+</script>

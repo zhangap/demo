@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReadableStream</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  async function * ints() {
+	  for (let i = 0; i < 10; i++) {
+          yield await  new Promise(resolve => setTimeout(resolve, 1000,i))
+	  }
+  }
+
+  const readableStream = new ReadableStream({
+      async start(controller) {
+		  for await(let chunk of ints()) {
+			  controller.enqueue(chunk)
+          }
+		  controller.close()
+      }
+  })
+  console.log(readableStream.locked)
+  const readableStreamDefaultReader = readableStream.getReader()
+  console.log(readableStream.locked);
+  (async function() {
+	  while (true) {
+		  const {done, value} = await readableStreamDefaultReader.read();
+		  if(done) {
+			  break
+          } else {
+			  console.log(value)
+          }
+      }
+  })()
+</script>

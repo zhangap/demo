@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    performance.mark('foo')
+    for (let i = 0; i < 1E6; i++) {
+    }
+	performance.mark('bar')
+    const [endMark, startMark] = performance.getEntriesByType('mark')
+    console.log(startMark.startTime - endMark.startTime)
+</script>
