@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>影子dom-命名槽位</title>
+    <style>
+        div{
+            border: 1px solid #ccc;
+            width:300px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div onclick="divClickHandle(this)">
+        <p>这个是没有槽位的元素</p>
+        <p slot="foo">Foo</p>
+        <p slot="bar">Bar</p>
+    </div>
+    <button onclick="addAttachShadow()">addAttachShadow</button>
+</body>
+</html>
+<script>
+    function addAttachShadow() {
+	    document.querySelector('div').attachShadow({mode: "open"}).innerHTML = `
+    <p>没有槽位的元素就会被覆盖</p>
+    <slot name="bar"></slot>
+    <slot name="foo"></slot>
+    <button onclick="clickHandle(this)">Foo</button>
+    `
+    }
+    // 注意，事件重定向只会发生在影子 DOM 中实际存在的元素上。使用<slot>标签从外部投射进来的
+    // 元素不会发生事件重定向，因为从技术上讲，这些元素仍然存在于影子 DOM 外部
+	function divClickHandle(event) {
+		console.log('outside', event)
+    }
+	function clickHandle(event) {
+		console.log('inside', event)
+    }
+</script>

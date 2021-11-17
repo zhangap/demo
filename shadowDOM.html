@@ -5,12 +5,13 @@
     <title>影子dom</title>
 </head>
 <body>
+<input type="button" onclick="getP()" value="countP">
 
 </body>
 </html>
 <script>
   for(let color of ['red', 'green', 'blue']) {
-    const div = document.createElement('div')
+    const div = document.createElement('section')
     const shadowDom = div.attachShadow({mode: 'open'})
     document.body.appendChild(div)
     shadowDom.innerHTML = `
@@ -21,5 +22,15 @@
             }
 </style>
 `
+  }
+
+  function countP(node) {
+    console.log(node.querySelectorAll('p'));
+  }
+  function getP() {
+    countP(document)
+    document.querySelectorAll('section').forEach(div => {
+      countP(div);
+    })
   }
 </script>

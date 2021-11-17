@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>影子dom-slot</title>
+</head>
+<body>
+    <div id="box">
+        <div>
+            <p>这个是原本的内容，如果设置成影子dom以后，要么是不可见，要么使用slot来替换</p>
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+    const box = document.getElementById('box')
+    // 1秒以后，p标签内容消失，hello world出来
+    // setTimeout(() => {
+	// 	box.attachShadow({mode:'open'}).innerHTML = 'hello world!';
+    // }, 1000)
+
+    setTimeout(() => {
+		box.attachShadow({mode: "open"}).innerHTML = `
+            <div id="newBox">
+                <p style="color:red;">这个是影子DOM，下面的内容是以前的内容</p>
+                <slot></slot>
+            </div>`
+
+	    console.log('newBox',document.getElementById('newBox'))
+	    console.log('box', document.getElementById('box'))
+    }, 1000)
+</script>

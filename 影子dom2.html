@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div>this is div box</div>
+  <p id="foo">Move me!!!</p>
+
+</body>
+</html>
+<script>
+    const div = document.querySelector('div')
+    const pEle = document.getElementById('foo');
+
+	const shadowDOM = div.attachShadow({mode: "open"});
+	div.parentNode.removeChild(pEle)
+    shadowDOM.appendChild(pEle);
+    console.log(shadowDOM.innerHTML);
+
+	document.getElementById('div');
+	const div= document.getElementById('he')
+</script>
