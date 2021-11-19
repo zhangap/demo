@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义元素生命周期方法</title>
+</head>
+<body>
+<button onclick="createTag()">createTag</button>
+<button onclick="appendTag()">appendTag</button>
+<button onclick="removeTag()">removeTag</button>
+</body>
+</html>
+<script>
+    class FooElement extends HTMLElement {
+		constructor() {
+			super();
+			console.log('ctor')
+		}
+		connectedCallback() {
+			console.log('connected')
+        }
+		disconnectedCallback() {
+			console.log('disconnected')
+        }
+    }
+    // 定义自定义标签
+	customElements.define('x-foo', FooElement)
+    let fooElement = null
+    function createTag() {
+		fooElement = document.createElement('x-foo')
+    }
+	function appendTag() {
+		document.body.appendChild(fooElement)
+    }
+	function removeTag() {
+		document.body.removeChild(fooElement)
+    }
+
+</script>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON对象</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  var obj = {
+	  name: 'zap',
+      age: 30,
+      address: '湖北秭归',
+      son: {
+		  name: '张无忌',
+          sex: 'man'
+      }
+  }
+  // 第三个参数是用来控制缩进
+  console.log(JSON.stringify(obj, null,'--'))
+
+  let book = {
+	  title: 'Professional Javascript',
+      authors: [
+	      'zhangaiping',
+           'Matt'
+      ],
+      edition: 4,
+      year: 2017,
+      toJSON: function() {
+		  return this.title
+      }
+  }
+  console.log(JSON.stringify(book))
+
+  // 测试json转换是否是深度clone
+  var p = {
+	  name: '张无忌',
+	  age: 30
+  };
+  let person = {
+	  name: '张三丰',
+      age: 100,
+      son: {
+		  name: '张翠山',
+          age: 50,
+          son:p,
+          arr: [0]
+      },
+      sayHHello() {
+	      console.log(this.name)
+      }
+  }
+
+  let person2 = JSON.parse(JSON.stringify(person));
+  p.address = '明教';
+  person.son.address = '冰火岛'
+  person.son.arr.push(2);
+  console.log('person',person)
+  console.log('person2',person2)
+
+</script>

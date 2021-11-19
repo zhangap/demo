@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>升级自定义元素</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // customElements.whenDefined('x-zap').then(() => {
+	//     console.log('x-zap custom element defined!')
+    // })
+    // console.log(customElements.get('x-zap'))
+    // customElements.define('x-zap', class{})
+    // console.log(customElements.get('x-zap'))
+
+
+    const fooElement = document.createElement('x-foo')
+    class FooElement extends  HTMLElement {
+    }
+	customElements.define('x-foo', FooElement)
+    console.log(fooElement instanceof FooElement)
+    // 强制升级
+    customElements.upgrade(fooElement)
+    console.log(fooElement instanceof FooElement)
+</script>

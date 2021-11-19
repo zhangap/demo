@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义元素</title>
+</head>
+<body>
+  <x-foo>I'm inside a nonsense element</x-foo>
+</body>
+</html>
+<script>
+    const xFoo = document.querySelector('x-foo')
+    xFoo.style.color = 'red';
+	console.log(xFoo)
+    console.log(xFoo instanceof HTMLElement)
+</script>

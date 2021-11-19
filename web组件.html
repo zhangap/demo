@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<template id="x-bar-tpl">
+    <p>这个是自定义标签+影子dom</p>
+</template>
+
+</body>
+</html>
+<script>
+    // class FooElement extends HTMLElement {
+	// 	constructor() {
+	// 		super();
+	// 		this.attachShadow({mode: 'open'})
+    //         this.shadowRoot.innerHTML = `<p>I'm inside a custom element!</p>`
+	// 	}
+    // }
+    //
+	// customElements.define('x-foo', FooElement);
+    //
+	// document.body.innerHTML = `<x-foo></x-foo>`
+
+    const template = document.querySelector('#x-bar-tpl')
+    class BarElement extends  HTMLElement {
+		constructor() {
+			super();
+			this.attachShadow({mode: 'open'})
+            debugger
+            this.shadowRoot.appendChild(template.content.cloneNode(true))
+		}
+    }
+	customElements.define('x-bar', BarElement)
+    const div = document.createElement('div')
+    div.innerHTML = `<x-bar></x-bar>`
+    document.body.appendChild(div);
+</script>

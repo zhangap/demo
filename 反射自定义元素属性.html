@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>反射自定义元素属性</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    class FooElement extends HTMLElement {
+		constructor() {
+			super();
+			this.bar = true
+		}
+		get bar() {
+			console.log('get method....')
+			return this.getAttribute('bar')
+        }
+		set bar(value) {
+			console.log('set method....', value)
+            this.setAttribute('bar', value)
+        }
+		static get observedAttributes() {
+			return ['bar']
+        }
+	    attributeChangedCallback(name, oldValue, newValue) {
+			if(oldValue !== newValue) {
+				console.log(`${oldValue}->${newValue}`)
+                this[name] = newValue
+            }
+        }
+    }
+	customElements.define('x-foo', FooElement);
+	document.body.innerHTML = `<x-foo bar="init"></x-foo>`
+
+    setTimeout(() => {
+	    document.querySelector('x-foo').setAttribute('bar', 'changed-value')
+	    console.log(document.querySelector('x-foo').getAttribute('bar'))
+    }, 2000)
+
+</script>
