@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工作者线程</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  const worker = new Worker('./work.js');
+  console.log(worker)
+  worker.onmessage = event => {
+    console.log('主线程收到消息',event.data)
+      worker.postMessage('main worker send message')
+  }
+</script>

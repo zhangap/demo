@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fetch API</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    let f = fetch('./data/data1.json');
+	f.then(response => {
+		console.log('response---------json',response)
+		console.log(response.status, response.statusText)
+		response.json().then(res => {
+			console.log(res)
+        })
+    }, err => {
+		console.error('err', err)
+    })
+
+    let f2 = fetch('./data/a.txt');
+	f2.then(response => {
+		console.log('response---------text', response)
+		console.log(response.status, response.statusText)
+        response.text().then(res => {
+	        console.log(res)
+        })
+    })
+</script>

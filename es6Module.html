@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模块加载</title>
+</head>
+<body>
+
+</body>
+</html>
+<!--这里不管加载多少次，始终只有一次执行-->
+<script type="module" src="module/m1.js"></script>
+<!--<script src="es6Module.js" async></script>-->
+<script src="es6Module.js" defer></script>
+<script>
+	console.log('虽然此标签在后面，但是会先去加载。入口文件')
+</script>
+<!--如果script标签上没有任何标记，则会作为入口文件率先执行; async:异步加载脚本，一旦脚本可用，会立即执行; defer规定会对脚本进行延迟执行，直到页面加载为止-->

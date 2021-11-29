@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>request</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    const request = new  Request('./data/data1.json');
+	fetch(request).then(response => {
+		response.json().then(res => {
+			console.log(res)
+        })
+    })
+    const r = new Request('./data/a.txt')
+    fetch(r.clone())
+    fetch(r.clone())
+    fetch(r)
+</script>

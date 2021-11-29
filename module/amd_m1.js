@@ -1,0 +1,1 @@
+define('ma', ['require', 'exports'])

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IndexDB</title>
+</head>
+<body>
+<input type="button" value="insert data" onclick="insertHandle()">
+<input type="button" value="read data" onclick="readHandle()">
+</body>
+</html>
+<script>
+    let db,request, version =200;
+	request = indexedDB.open('admin', version)
+    request.onerror = event => {
+        console.error('数据库打开失败', event)
+    }
+	request.onsuccess = event => {
+        db = event.target.result
+		console.log('数据库打开成功',event)
+	}
+	request.onupgradeneeded = event => {
+		db = event.target.result
+        // 新建了一个表，id是主键
+		let store = db.createObjectStore('user', {keyPath: 'id'})
+        // 索引名称、索引所在的属性、配置对象
+        store.createIndex('name', 'name', {unique: false})
+        store.createIndex('age', 'age', {unique: false})
+        store.createIndex('IDCard', 'IDCard', {unique: true})
+
+    }
+	function insertHandle() {
+		if(!db) return
+        let transaction = db.transaction('user', 'readwrite')
+        let store = transaction.objectStore('user')
+		for (let i = 0; i < 10 ; i++) {
+			store.add({
+				id: `id${i}`,
+				name: 'zap',
+				age: 31,
+				IDCard: '4205201990000000' + i
+			})
+		}
+    }
+	function readHandle() {
+		if(!db) return
+        let store = db.transaction(['user'], 'readwrite').objectStore('user')
+		let request = store.getAll('id5')
+        request.onerror = () => {
+	        console.log('数据读取失败')
+        }
+		request.onsuccess = () => {
+			console.log(request.result)
+        }
+    }
+</script>

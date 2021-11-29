@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工作者线程</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    const channel = new BroadcastChannel('worker_channel')
+
+    const worker = new Worker('./work3.js')
+
+    channel.onmessage = ({data}) => {
+	    console.log(`heard ${data} on page`)
+    }
+	setTimeout(() => {
+		channel.postMessage('foo')
+    }, 2000)
+</script>

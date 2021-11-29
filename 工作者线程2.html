@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工作者线程2</title>
+</head>
+<body>
+<input type="button" onclick="startHandle()" value="开始给工作线程发送消息">
+<input type="button" onclick="testHandle()" value="测试按钮是否可点击">
+</body>
+</html>
+<script>
+    const worker = new Worker('./work2.js')
+    let stop = false
+    let timer = null
+    worker.onmessage = event => {
+		if(event.data === 'stop') stop = true
+    }
+	function startHandle() {
+		console.log('准备发送消息')
+		worker.postMessage(10000)
+    }
+    timer = setInterval(() => {
+	    if(stop){
+		    clearInterval(timer)
+	    } else {
+		    console.log('主线程还在工作' + Date.now())
+	    }
+    },500)
+	function testHandle() {
+		console.warn('按钮可以被点击' + Date.now())
+    }
+
+</script>

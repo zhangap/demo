@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReadableStream-fetch</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // fetch('https://fetch.spec.whatwg.org/').then(response => {
+	// 	response.body.getReader().read().then(res => {
+	// 		console.log(res)
+    //     })
+    // })
+
+    fetch('https://fetch.spec.whatwg.org/')
+      .then((response) => response.body)
+      .then((body) => {
+	      let reader = body.getReader();
+	      function processNextChunk({value, done}) {
+		      if (done) {
+			      return;
+		      }
+		      console.log(value);
+		      return reader.read()
+			    .then(processNextChunk);
+	      }
+	      return reader.read()
+		    .then(processNextChunk);
+      });
+</script>
