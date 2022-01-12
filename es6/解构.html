@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // 对象解构
+	let node = {
+		  type: 'Identifier',
+		  name: 'foo'
+	  },
+	  type = 'Literal',
+	  name = 5;
+
+	function outputInfo(value) {
+		console.log(value === node)
+	}
+	outputInfo({type,name} = node)
+	console.log(type)
+	console.log(name)
+
+
+    console.log('数组解构-------------------')
+    // 数组解构
+    let colors = ['red', 'green', 'blue']
+
+    // let [firstColor,secondColor] = colors
+    // console.log(firstColor)
+    // console.log(secondColor)
+    //
+    // let [,,thirdColor] = colors
+    // console.log(`thirdColor=${thirdColor}`)
+    //
+    // console.log('数据解构赋值，互换位置')
+    // let a = 1,b =2;
+	// [a, b] = [b, a]
+    // console.log(a,b)
+
+
+    // let[firstColor, ...restColors] = colors
+    // console.log(firstColor)
+    // console.log(restColors)
+
+    console.log('使用解构赋值来克隆数组,这种克隆，只是浅复制')
+    let[...cloneColors] = colors
+    console.log(colors, cloneColors)
+
+    let person = [
+	    {name: 'zap', age: 32},
+	    {name: 'zal', age: 34}
+    ]
+    // let [...clonePerson] = person
+    // clonePerson[0].address = '湖北秭归'
+    // console.log('原数组的值', JSON.stringify(person))
+    // console.log('拷贝后数组的值', JSON.stringify(clonePerson))
+
+    let otherPerson = person.concat()
+    otherPerson[0].address = '湖北武汉'
+    console.log('原数组的值', JSON.stringify(person))
+    console.log('拷贝后数组的值', JSON.stringify(otherPerson))
+
+
+    function setCookie(name, value, {secure, path, domain, expires}) {
+		// 设置cookie的相关代码
+    }
+
+
+
+
+
+</script>

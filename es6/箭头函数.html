@@ -9,10 +9,98 @@
 </body>
 </html>
 <script>
-    const sayHello = (name, age) => {
-	    console.log(`hello, my name is ${name}, I'm ${age} years old!`)
-	    // Uncaught ReferenceError: arguments is not defined
-	    console.log('arguments', arguments)
-    }
+	"use strict"
+	const sayHello = (name, age) => {
+		console.log(`hello, my name is ${name}, I'm ${age} years old!`)
+		// Uncaught ReferenceError: arguments is not defined
+		try {
+			console.log('arguments', arguments)
+		} catch (e) {
+			console.error(e)
+		}
+
+	}
 	sayHello('zap', 32)
+	// 花括号被用于表示函数的主题，它在你纸巾看到的例子中都工作正常。但若箭头函数想要从函数体内向外返回一个对象字面量，就必须要将
+	// 该字面量包裹在圆括号内
+	const getTempItem = id => ({id, name: 'temp'})
+
+
+	// 箭头函数被设计成为抛弃型的函数，因此不能被用于定义新的类型；prototype属性的缺失让这个特性显而易见。对箭头函数使用new运算符
+	// 会导致错误
+	const MyType = () => {
+	}
+	// Uncaught TypeError: MyType is not a constructor
+	// const object = new MyType()
+
+	const arrowFn1 = () => {
+		console.log(this)
+	}
+	const fn2 = function () {
+		console.log(this)
+	}
+	arrowFn1()
+	fn2()
+
+	const obj = {
+		name: 'zap'
+	}
+	// 不能使用bind、call、apply方法来改变this指向
+	arrowFn1.bind(obj)()
+	fn2.bind(obj)()
+	arrowFn1.call(obj)
+	fn2.call(obj)
+	arrowFn1.apply(obj)
+	fn2.apply(obj)
+
+	// 箭头函数和数组（能使用回调函数的数组方法：sort/map/reduce）都能从箭头函数的简洁语法中获取收益、它将看似复杂的需求转换为简单的代码
+	const values = [1, 3, 2, 4, 5, 2, 9, 6, 7, 8]
+	const result = values.sort((a, b) => a - b)
+	console.log(result)
+
+
+	// 没有arguments绑定
+	/**
+	 * 尽管箭头函数没有自己的arguments对象，但是仍然能够访问包含它的函数的arguments对象。无论此后箭头函数在何处执行，该对象都是可用的。
+	 */
+
+	function createArrowFunctionReturningFirstArg() {
+		return () => arguments[0]
+	}
+
+	const arrowFunction = createArrowFunctionReturningFirstArg(5)
+	console.log(arrowFunction())
+
+	// 箭头函数的识别
+	const comparator = (a, b) => a - b
+	console.log(typeof comparator)
+	console.log(comparator instanceof Function)
+
+	// 尾调用优化
+	function factorial(n) {
+		if (n <= 1) {
+			return 1
+		} else {
+			return n * factorial(n - 1)
+		}
+	}
+
+	// Uncaught RangeError: Maximum call stack size exceeded
+	// 以上写法是没有被优化的，会有堆栈溢出
+	console.log(`100的阶乘结果为：${factorial(100)}`)
+
+    //这么写貌似也没有被尾调用优化
+	function factorial2(n, p = 1) {
+		if (n <= 1) {
+			return 1 * p
+		} else {
+			const result = n * p
+			return factorial2(n - 1, result)
+		}
+	}
+
+	console.log(`100的阶乘结果为：${factorial2(100)}`)
+
+
+
 </script>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扩展的对象功能</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+	// 自由属性的枚举顺序
+    const obj = {
+		a:1,
+        0:1,
+        c:1,
+        2:1,
+        b:1,
+        1:1
+    };
+	obj.d = 1;
+	// 012acbd
+    // 规则：数值类型的键会被合并排序，即使未遵循在对象字面量中的顺序。字符串类型的键会跟在数值类型的键之后，
+    // 按照被添加到obj对象的顺序，在对象字面量中定义的键会首先出现、接下来动态添加的会后出现。
+
+	console.log(Object.getOwnPropertyNames(obj).join(''))
+
+    let person = {
+		getGreeting() {
+			return 'hello'
+        }
+    }
+	let dog = {
+		getGreeting() {
+			return "Woof";
+		}
+	}
+
+	// 原型为person
+	// let friend = Object.create(person)
+	// console.log(friend.getGreeting())
+	// console.log(Object.getPrototypeOf(friend) === person)
+    //
+	// console.log('将原型设置为dog')
+    // Object.setPrototypeOf(friend, dog)
+	// console.log(friend.getGreeting())
+	// console.log(Object.getPrototypeOf(friend) === dog)
+
+
+    let friend = {
+		getGreeting() {
+			// return Object.getPrototypeOf(this).getGreeting.call(this) + ', Hi'
+            return super.getGreeting() + ', Hi'
+        }
+    }
+	Object.setPrototypeOf(friend, person)
+	console.log(friend.getGreeting())
+	console.log(Object.getPrototypeOf(friend) === person)
+
+    Object.setPrototypeOf(friend, dog)
+	console.log(friend.getGreeting())
+	console.log(Object.getPrototypeOf(friend) === dog)
+
+</script>
