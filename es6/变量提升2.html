@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // var message = 'hello'
+    // let age = 50
+    //
+    // // 以下代码均会报错
+    // const message = 'hello2'
+    // const age = 500
+    // console.log(message, age)
+
+    //暂时性死区 Uncaught ReferenceError: Cannot access 'value' before initialization
+    // if(true) {
+	//     console.log(typeof value)
+    //     let value = 100
+    // }
+
+    // 如果这里用var声明i，则会打印10次10，如果用let声明，每个i都是独立的新变量，所以会正确打印0-9
+    // var fns = []
+    // for (let i = 0; i <10 ; i++) {
+    //     fns.push(function(){
+	//         console.log(i)})
+    // }
+	// fns.forEach(fn => {
+	// 	fn()
+    // })
+    //
+    // var fns2 = []
+    // var objs = {
+	// 	a: true,
+    //     b: true,
+    //     c: true
+    // }
+	// // 如果这里用val声明key，则会打印3次c，用let声明，会正确打印objs的key值
+    // for (let key in objs) {
+	// 	fns2.push(function(){
+	// 		console.log(key)
+    //     })
+    // }
+	// fns2.forEach(fn => {
+	// 	fn()
+    // })
+
+    var someParam = '这个是var声明的全局变量'
+    let someParam2 = '这个是let声明的变量，虽然是全局声明，但是是局部变量'
+    console.log(window.someParam)
+    // true
+    console.log(window.someParam === someParam)
+    console.log(window.someParam2)
+    // false
+    console.log(window.someParam2 === someParam2)
+
+
+</script>

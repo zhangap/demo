@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    const sayHello = (name, age) => {
+	    console.log(`hello, my name is ${name}, I'm ${age} years old!`)
+	    // Uncaught ReferenceError: arguments is not defined
+	    console.log('arguments', arguments)
+    }
+	sayHello('zap', 32)
+</script>

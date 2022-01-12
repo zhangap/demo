@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+	// 前面的参数不能访问后面的参数： ReferenceError: Cannot access 'second' before initialization
+	//  函数每个参数都会创建一个新的标识符绑定，它在初始化之前是不允许被访问，否则会抛出错误。参数初始化会在函数被调用时进行，无论
+	//  是给参数传递一个值、还是试用了参数的默认值
+	// function add(first = second, second) {
+	// 	return first + second
+	// }
+    //
+	// console.log(add(1, 1))
+	// console.log(add(undefined, 1))
+
+	// 不具名参数
+	// function pick(object) {
+	// 	let result = Object.create(null)
+	// 	for (let i = 1; i < arguments.length; i++) {
+	// 		let prop = arguments[i]
+	// 		result[prop] = object[prop]
+	// 	}
+	// 	return result
+	// }
+	// let book = {
+	// 	title: 'Understanding ES6',
+    //     author: 'Nicholas C. Zakas',
+    //     year: 2015
+    // }
+    //
+	// let bookData = pick(book, 'author', 'year')
+	// console.log(bookData)
+    //
+    // // 剩余参数
+    // // 一个函数只能有一个剩余参数，且必须放在最后
+    // //剩余参数不能在对象字面量的setter属性中使用（对象字面量的setter被限定只能使用单个参数；而剩余参数按照定义是不限制参数的数量）
+    //
+    // function pick2(object, ...keys) {
+	// 	let result = Object.create(null)
+	//     for (let i = 0; i < keys.length; i++) {
+    //         const prop = keys[i]
+    //         result[prop] = object[prop]
+	//     }
+	// 	return result
+    // }
+    //
+	// console.log(pick2(book, 'author', 'year', 'title'))
+    //
+    // // 构造函数
+    // const add = new Function('...args', 'let result = 0; args.forEach(val =>{ result += val});console.log(result)')
+    // add(1,2,3,4)
+    //
+    // // 扩展运算符
+    // const values = [50,25,100,75,88]
+    // // 查找最大值
+    // let max = values[0]
+	// for (let i = 1; i < values.length ; i++) {
+    //     if(values[i] > max){
+	// 		max = values[i]
+    //     }
+	// }
+	// console.log('max=' + max)
+    // //利用扩展运算符查找最大值
+	// console.log(`max=${Math.max(...values)}`)
+    //
+    // const values2 = [-25, -50,-100, -75]
+	// console.log(Math.max(...values2, 0))
+	// console.log(Math.min(0, ...values2))
+    //
+    // // 结论：用扩展运算符传递参数，使得更容易将数组作为函数来使用，你会发现在大部分场景中扩展运算符都是apply()方法的合适替代品
+    //
+    //
+    // // 函数名
+    // function doSomething() {}
+	// const doAnotherThing = function() {}
+	// console.log(doSomething.name, doAnotherThing.name)
+    //
+    // let doSomething2 = function doSomethingElse(){}
+    //
+	// let person = {
+	// 	get firstName() {
+	// 		return 'zap'
+    //     },
+    //     sayName() {
+	//         console.log(this.name)
+    //     }
+    // }
+	// console.log(doSomething2.name)
+	// console.log(person.sayName.name)
+    //
+    // const descriptor = Object.getOwnPropertyDescriptor(person, 'firstName')
+	// console.log(descriptor)
+    //
+    // // 使用bind绑定的函数会在名称属性之前带有boud前缀；而使用Function构造器创建的函数，其名称属性则会有anonymous前缀：
+    //
+    // const doSomething3 = function(){}
+	// console.log(doSomething3.bind().name)
+	// console.log((new Function()).name)
+
+    // ES5中判断函数如何被调用
+    // function Person(name) {
+	// 	if(this instanceof  Person) {
+	// 		this.name = name
+    //     } else {
+	// 		throw new Error('you must user new with Person.')
+    //     }
+    // }
+	// let person2 = new Person('zap')
+    // let notAperson = Person('zap')
+
+
+    //new.target可以判断是否是使用new来调用函数
+    // function People(name) {
+	//     console.log(`new.target === People`, new.target === People)
+	// 	if(new.target === People) {
+	// 		this.name = name
+    //     } else {
+	// 		console.error('you must user new with People.')
+    //     }
+    // }
+    //
+	// let p = new People('zap')
+    //
+    //
+    // class Student {
+	// 	constructor(name) {
+	// 		this.name = name
+	// 		console.log(new.target)
+	// 	}
+	// 	sayName(){
+	// 		return this.name
+    //     }
+    // }
+    //
+	// let s = new Student('zap')
+	// console.log(s.sayName())
+
+    // 在ES5中，这段代码会抛出语法错误，然而在ES6中会将函数视为块级声明，并允许它在定义所在的代码块内部被访问
+    if(true) {
+	    console.log(typeof doSomething)
+        function doSomething() {
+
+        }
+		doSomething()
+    }
+	console.log(typeof doSomething)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

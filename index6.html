@@ -8,7 +8,7 @@
     <link rel="preload" href="demo2.js">
 </head>
 <body>
-    
+
 </body>
 </html>
 <script>
@@ -16,4 +16,28 @@
         console.log('<script>')
     }
     sayScript();
+	console.log('开始请求')
+    getList()
+    console.log('结束请求')
+
+
+
+	async function getList() {
+		console.log('start')
+		const result = await axios('https://www.baidu.com').then(res => {
+			return res + ' hello'
+        });
+		console.log(result)
+		console.log('end')
+    }
+
+    function axios(url) {
+	    return new Promise(resolve => {
+			setTimeout(() => {
+				resolve(Math.random())
+            }, 500)
+        })
+    }
+
+
 </script>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>字符串和曾泽表达式</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // const text = ""
+    // console.log(text.length)
+    // console.log(/^.$/.test(text))
+    // console.log(text.charAt(0))
+    // console.log(text.charAt(1))
+    // console.log(text.charCodeAt(0))
+    // console.log(text.charCodeAt(1))
+
+    // const text = 'a'
+    // console.log(text.charCodeAt(0))
+    // console.log(text.charCodeAt(1))
+    // console.log(text.charCodeAt(2))
+    //
+    // console.log(text.codePointAt(0))
+    // console.log(text.codePointAt(1))
+    // console.log(text.codePointAt(2))
+    //
+    // console.log(String.fromCodePoint(134071))
+
+    // 识别子字符串的方法，以下三个方法还接受第二个参数，用于指定从某个位置开始查找
+    // const str = '中华人民共和国'
+    // console.log(str.includes('人民'))
+    // console.log(str.startsWith('中'))
+    // console.log(str.endsWith('国'))
+
+    // 重复次数
+    // console.log('hello world '.repeat(2))
+
+    // 正则表达式y标志
+    /*const text = 'hello1 hello2 hello3';
+    let pattern = /hello\d\s?/,
+      result = pattern.exec(text),
+      globalPattern = /hello\d\s?/g,
+      globalResult = globalPattern.exec(text),
+      stickyPattern = /hello\d\s?/y,
+      stickyResult = stickyPattern.exec(text)
+
+    console.log('--------------1---------------')
+    console.log(`[${result[0]}]`)
+    console.log(`[${globalResult[0]}]`)
+    console.log(`[${stickyResult[0]}]`)
+
+    console.log('--------------2---------------')
+    pattern.lastIndex = 1
+    globalPattern.lastIndex = 1
+    stickyPattern.lastIndex = 1
+
+    result = pattern.exec(text)
+    globalResult = globalPattern.exec(text)
+    stickyResult = stickyPattern.exec(text)
+
+    try {
+	    console.log(`[${result[0]}]`)
+	    console.log(`[${globalResult[0]}]`)
+	    console.log(`[${stickyResult[0]}]`)
+    }catch (e) {
+	    console.log(e)
+    }
+
+    const pattern2 = /hello\d/y;
+    console.log(pattern2.sticky)
+
+    // es6新增flags属性
+    const re = /ab/g
+
+    console.log(re.source)
+    console.log(re.flags)*/
+
+
+    // 模板字面量（是以一种新的方式解决了以下问题，而并未给JS已有的字符串添加额外的功能）
+    // 1、多行字符串：针对多行字符串的形式概念
+    // 2、基本的字符串格式化：将字符串部分替换为已经存在的变量值的能力
+    // 3、HTML转义：能转换字符串以便将其安全插入到HTML中的能力
+    // const multilinetStr = `hello
+    //                        world!`
+    // console.log(multilinetStr)
+
+
+    function passthru(literals, ...substitutions) {
+	    console.log(literals)
+	    console.log(substitutions)
+		let result = ''
+
+	    for (let i = 0; i <  substitutions.length; i++) {
+			result += literals[i]
+            result += substitutions[i]
+	    }
+		result += literals[literals.length -1]
+        return result
+    }
+
+	let count = 10,
+      price = 0.25,
+      message = passthru`${count} items cost $${(count * price).toFixed(2)}.`
+      // message = passthru`${count}-${(count * price).toFixed(2)}.`
+    console.log(message)
+
+
+
+
+
+
+
+</script>
