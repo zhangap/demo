@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>符号和符号属性</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // let firstName = Symbol()
+    // let person = {}
+    // console.log(firstName)
+    // person[firstName] = 'zap'
+    // console.log(person[firstName])
+
+
+    // let firstName = Symbol('first name')
+    // let person = {}
+    //
+    // person[firstName] = 'zhangaiping'
+    // console.log('first name' in person)
+    // console.log(person[firstName])
+    // console.log(firstName)
+    // console.log(person)
+    //
+    // let symbol = Symbol('test symbol')
+    // console.log(typeof symbol)
+    //
+    //
+    // let uid = Symbol.for('uid')
+    // let object = {
+	// 	[uid]: '12345'
+    // }
+    // console.log(object[uid])
+    //
+    // let uid2 = Symbol.for('uid')
+    // object[uid2] = '67890'
+    // console.log(`uid===uid2 ?${uid === uid2}`)
+    // console.log(object)
+
+    // let uid = Symbol.for('uid')
+    // let object = {
+	// 	[uid]: '123456'
+    // }
+    //
+	// let symbols = Object.getOwnPropertySymbols(object)
+    //
+    // console.log(symbols)
+    // console.log(symbols.length)
+    // console.log(symbols[0])
+    // console.log(object[symbols[0]])
+
+    // let obj = []
+    // console.log(obj instanceof  Array)
+    // console.log(Array[Symbol.hasInstance](obj))
+
+    // let collection = {
+	// 	0: "hello",
+    //     1: 'world',
+    //     length: 2,
+    //     [Symbol.isConcatSpreadable]: true
+    // }
+	// let messages = ['Hi'].concat(collection)
+    // console.log(messages)
+    // console.log(messages.length)
+
+    // let hasLengthOf10 = {
+	// 	[Symbol.match]: function(value) {
+	// 		return value.length === 10 ? [value.substring(0, 10)] : null
+    //     },
+    //     [Symbol.replace]: function(value, replacement) {
+	// 		return value.length === 10 ? replacement + value.substring(10) : value;
+    //     },
+    //     [Symbol.search]: function(value) {
+	// 		return value.length === 10 ? 0 : -1
+    //     },
+    //     [Symbol.split]: function(value) {
+	// 		return value.length === 10 ? ['', ''] : [value]
+    //     }
+    // }
+    //
+	// let message1 = 'hello world'
+    // let message2 = 'hello John'
+    //
+    // let match1 = message1.match(hasLengthOf10)
+    // let match2 = message2.match(hasLengthOf10)
+    // console.log(match1)
+    // console.log(match2)
+
+    // 使用Symbol.toPrimitive属性并将一个函数赋值给它，便可以重写默认的转换行为
+
+    function Temperature(degrees) {
+		this.degrees = degrees
+    }
+
+	Temperature.prototype[Symbol.toPrimitive] = function(hint) {
+		switch (hint) {
+
+			case 'string':
+				return this.degrees + '\u00b0'
+            case 'number':
+				return this.degrees
+            case 'default':
+				return this.degrees + ' degrees'
+		}
+    }
+	let freezing = new Temperature(32)
+    console.log(freezing + '!')
+    console.log(freezing/2)
+    console.log(String(freezing))
+
+    // Symbol.toStringTag 该符号代表了所有对象的一个属性
+    console.log(Object.prototype.toString.call(JSON))
+
+    function Person(name) {
+		this.name = name;
+    }
+	Person.prototype[Symbol.toStringTag] = 'Person'
+
+    let me = new Person('张三丰')
+    console.log(me.toString())
+    console.log(Object.prototype.toString.call(me))  //[object Person]
+
+    // 改变原生对象的字符串标签
+    Array.prototype[Symbol.toStringTag] = 'Tengri'
+    const values = []
+    console.log(Object.prototype.toString.call(values))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

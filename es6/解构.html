@@ -65,10 +65,13 @@
     console.log('拷贝后数组的值', JSON.stringify(otherPerson))
 
 
-    function setCookie(name, value, {secure, path, domain, expires}) {
+    function setCookie(name, value, {secure, path, domain, expires} = {}) {
 		// 设置cookie的相关代码
+	    console.log(name, value, secure, path, domain, expires)
     }
 
+	setCookie('type2', 'js')
+	setCookie('type', 'js', {secure: true})
 
 
 
