@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map和Set</title>
+</head>
+<body>
+    <div id="box">
+        <input type="text" id="txt" value="123">
+    </div>
+</body>
+</html>
+<script>
+    // 1、对象的属性只能是字符串
+    const obj = Object.create(null)
+    obj[5] = 'zap-5'
+    obj['5'] = 'zap-6'
+    console.log(obj)
+
+    const set = new Set([1,2,3,4,5,5,5])
+    console.log(set.size)
+
+    const set2 = new Set()
+    set.add(5)
+    set.add('5')
+    console.log(set.has(5))
+    console.log(set.has('5'))
+    console.log(set.has(6))
+
+    const set3 = new Set([1,2])
+    // set3.forEach((key,value, set) => {
+	//     console.log(key, value, set)
+    // })
+    let processor = {
+		output(value){
+			console.log(value)
+        },
+        // forEach函数第二个参数可以传递上下文对象
+        process(dataset) {
+			dataset.forEach(function(key,value, set){
+				this.output(key)
+            }, this)
+        },
+        process2(dataset) {
+			dataset.forEach(value => {
+				this.output(value)
+            })
+        }
+    }
+	processor.process(set3)
+    processor.process2(set3)
+
+    // 将set转换为数组
+    const set4 = new Set([1,1,2,2,3,4,3,4,5])
+    console.log([...set4])
+    // 对象的key的顺序规则：如果有数字，先按照数字排序，后面按照添加顺序排序
+    const obj2 = {
+		1: true,
+        a: true,
+        2: true,
+        b: true,
+        3: true,
+        4: true,
+        c: true,
+        e: true,
+        d: true
+    }
+    console.log(Object.keys(obj2))
+
+    const set5 = new Set()
+    const weakSet = new WeakSet()
+    let key = {}
+    set5.add(key)
+    weakSet.add(key)
+    console.log(set5)
+    console.log(weakSet)
+    key = null
+    console.log(set5)
+    console.log(weakSet)
+
+
+    console.log('----------map----------')
+    const map = new Map([['name', 'zap'], ['age', 32]])
+    map.forEach((value, key, ownerMap) => {
+	    console.log(value,key,ownerMap)
+	    console.log(ownerMap === map)
+    })
+
+    const weakMap = new WeakMap()
+    let element = document.querySelector('#txt')
+    weakMap.set(element, 'hello')
+
+    let value = weakMap.get(element)
+    console.log(value)
+
+    element.parentNode.removeChild(element)
+    element = null
+    console.log(weakMap)
+
+</script>

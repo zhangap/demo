@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>迭代器与生成器</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // function *createIterator() {
+	// 	yield 1;
+	// 	yield 2;
+	// 	yield 3;
+	// 	yield 4;
+    // }
+	// const iterator = createIterator()
+    // console.log(iterator.next())
+    // console.log(iterator.next())
+    // console.log(iterator.next())
+    // console.log(iterator.next())
+    // console.log(iterator.next())
+    //
+    //
+    // function *createIterator2(items) {
+	//     for (let i = 0; i < items.length ; i++) {
+    //         yield  items[i]
+	//     }
+    // }
+	// const iterator2 = createIterator2([1,2,3])
+    // console.log(iterator2.next().value)
+    // console.log(iterator2.next().value)
+    // console.log(iterator2.next().value)
+    // console.log(iterator2.next().value)
+    //
+    // // 访问默认迭代器
+    // const values = ['a', 'b', 'c','d']
+    // const iteratorValues = values[Symbol.iterator]()
+    // console.log(iteratorValues.next().value)
+    // console.log(iteratorValues.next().value)
+    // console.log(iteratorValues.next().value)
+    // console.log(iteratorValues.next().value)
+    // console.log(iteratorValues.next().value)
+    //
+    // // 检测是否有默认迭代器
+    // function isIterator(object) {
+	// 	return typeof object[Symbol.iterator] === 'function'
+    // }
+    //
+    // console.log(isIterator([]))
+    // console.log(isIterator('hello'))
+    // console.log(isIterator(new Set()))
+    // console.log(isIterator(new Map()))
+    // // weakMap和weakSet是不能迭代的
+    // console.log(isIterator(new WeakSet()))
+    // console.log(isIterator(new WeakMap()))
+    //
+    // console.log('-------创建可迭代的对象---------')
+    // let collection = {
+	// 	items: [],
+    //     *[Symbol.iterator]() {
+	//         for (let i = 0; i < this.items.length ; i++) {
+	// 			yield this.items[i]
+	//         }
+    //     }
+    // }
+	// collection.items.push('this one')
+	// collection.items.push('this two')
+	// collection.items.push('this three')
+    //
+    // for (const item of collection) {
+	//     console.log(item)
+    // }
+    //
+	// for(const item of [1,2,3]){
+	// 	console.log(item)
+    // }
+	// for(const item of new Set([4,5,6])){
+	// 	console.log(item)
+    // }
+	// const dataMap = new Map()
+    // dataMap.set('one', 'this one')
+    // dataMap.set('two','this two')
+    // for(const item of dataMap) {
+	//     console.log(item)
+    // }
+    let colors = ['red', 'green', 'blue']
+    let tracking = new Set([1234, 5678,9012])
+    let data = new Map()
+    data.set('title', 'Javascript')
+    data.set('price', 100)
+
+    console.log('keys---------------')
+    for (const key of colors.keys()) {
+	    console.log(key)
+    }
+    for (const key of data.keys()) {
+	    console.log(key)
+    }
+    for (const key of tracking.keys()) {
+	    console.log(key)
+    }
+    console.log('entries---------------')
+    for (const entry of colors.entries()) {
+	    console.log(entry)
+    }
+    for (const entry of data.entries()) {
+	    console.log(entry)
+    }
+    for (const entry of tracking.entries()) {
+	    console.log(entry)
+    }
+    console.log('values-------------')
+    for (const value of colors.values()) {
+	    console.log(value)
+    }
+    for (const value of data.values()) {
+	    console.log(value)
+    }
+    for (const value of tracking.values()) {
+	    console.log(value)
+    }
+
+    console.log('字符串迭代')
+    const message = 'A   B'
+    for (let i = 0; i < message.length; i++) {
+	    console.log(message[i])
+    }
+	for(const c of message) {
+		console.log(c)
+    }
+
+	function *createIterator() {
+		let first = yield 1
+        let second = yield first + 1
+        yield second + 3
+    }
+	const iterator = createIterator()
+    console.log(iterator.next().value)
+    console.log(iterator.next(4).value)
+    // console.log(iterator.next(5).value)
+    console.log(iterator.next(new Error('hello')).value)
+
+
+</script>

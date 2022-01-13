@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类</title>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
+<script>
+  class Person {
+    constructor(name) {
+		this.name = name
+    }
+	sayName() {
+		return `hello, ${this.name}`
+    }
+  }
+  const person = new Person('zap')
+  console.log(person instanceof Person)
+  console.log(person instanceof Object)
+  console.log(typeof person)
+  console.log(typeof  Person)
+  // console.log(Object.prototype.toString.call(Person))
+
+  class CustomHTMLElement1 {
+	  constructor(element) {
+		  this.element = element
+	  }
+	  get html() {
+		  return this.element.innerHTML
+      }
+	  set html(value) {
+		  this.html.innerHTML = value
+      }
+  }
+  const element1 = new CustomHTMLElement1(document.getElementById('box'))
+  console.log(element1)
+
+  let CustomHtmlElement2 = (function(){
+	const CustomHtmlElement2 = function(element) {
+		if(new.target !== CustomHtmlElement2) {
+			throw new Error('Constructor must be called width new.')
+        }
+		this.element = element
+    }
+	Object.defineProperty(CustomHtmlElement2.prototype, 'html', {
+		enumerable: false,
+        configurable: true,
+        get() {
+			return this.element.innerHTML
+        },
+        set(value) {
+			this.element.innerHTML = value
+        }
+    })
+	return CustomHtmlElement2
+  }())
+  const element2 = new CustomHtmlElement2(document.getElementById('box'))
+  console.log(element2)
+</script>
