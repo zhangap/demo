@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>代理和反射</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+	// let target = {}
+	// let proxy = new Proxy(target, {})
+	//
+	// proxy.name= 'zap'
+	// console.log(proxy.name)
+	// console.log(target.name)
+
+
+	// let target = {
+	// 	name: 'zap'
+    // }
+    //
+	// let proxy = new Proxy(target, {
+	// 	set(trapTarget, key, value, receiver) {
+	// 		// 忽略已有属性，避免影响他们
+	// 		if (!trapTarget.hasOwnProperty(key)) {
+	// 			if(isNaN(value)) {
+	// 				throw new Error('property must be a number')
+    //             }
+	// 		}
+	// 		return Reflect.set(trapTarget,key,value,receiver)
+	// 	}
+	// })
+    // // 添加一个新的属性
+    // proxy.count = 1
+	// console.log(proxy, target)
+    //
+    // // 已经存在的属性
+    // proxy.name = 'proxy'
+	// console.log(proxy,target)
+    //
+    // // 新添加的属性必须是要数值型
+    // proxy.anotherName = '这里会抛出异常'
+
+    // let proxy2 = new Proxy({}, {
+	// 	get(trapTarget, key, receiver) {
+	// 		debugger
+	// 		if(!(key in receiver)) {
+	// 			throw  new TypeError(`Property ${key} doesn't exist`)
+    //         }
+	// 		return Reflect.get(trapTarget, key, receiver)
+    //     }
+    // })
+    // proxy2.name = 'zap'
+	// console.log(proxy2.name)
+	// console.log(proxy2.age)
+
+	// console.log('------------has的使用--------------')
+    // let target = {
+	// 	name: 'target',
+    //     value: 42
+    // }
+	// let proxy3 = new Proxy(target, {
+	// 	has(trapTarget, key) {
+	// 		if(key === 'value') {
+	// 			console.error('属性不存在')
+    //             return false
+    //         }else {
+	// 			return Reflect.has(trapTarget, key)
+    //         }
+    //     }
+    // })
+	// console.log("name" in target)
+	// console.log("value" in target)
+    //
+	// console.log("name" in proxy3)
+	// console.log("value" in proxy3)
+
+	// console.log('-----------delete--------------')
+    // let target = {
+	// 	name: 'target',
+    //     value: 42
+    // }
+	// let proxy = new Proxy(target, {
+	// 	deleteProperty(target, key) {
+	// 		if(key === 'value') {
+	// 			return false
+    //         } else {
+	// 			return Reflect.deleteProperty(target, key)
+    //         }
+	// 	}
+	// })
+	// console.log('value' in proxy)
+    // const res = delete proxy.value
+	// console.log('res', res)
+	// console.log('value' in proxy)
+    // delete proxy.name
+	// console.log('name' in proxy)
+
+	// console.log('-----------prototype------------')
+    // let target = {}
+    // let proxy = new Proxy(target, {
+	// 	getPrototypeOf(target) {
+	// 		return null
+	// 	},
+    //     setPrototypeOf(target, v) {
+	// 		return false
+    //     }
+    // })
+    // let targetProto = Object.getPrototypeOf(target)
+    // let proxyProto = Object.getPrototypeOf(proxy)
+    //
+	// console.log(targetProto === Object.prototype)
+	// console.log(proxyProto === Object.prototype)
+	// console.log(proxyProto)
+    //
+    // Object.setPrototypeOf(target, {})
+    // Object.setPrototypeOf(proxy, {})
+
+	console.log('---------preventExtensions------------')
+    // let result1 = Object.preventExtensions(2)
+	// console.log(result1)
+	// console.log(Object.preventExtensions({}))
+	// console.log(Reflect.preventExtensions({}))
+    // // 会报错
+	// console.log(Reflect.preventExtensions(2))
+
+    // let proxy = new Proxy({}, {
+	// 	defineProperty(trapTarget, key, descriptor) {
+	// 		return Reflect.defineProperty(trapTarget, key, descriptor)
+	// 	},
+    //     getOwnPropertyDescriptor(target, p) {
+	// 		return Reflect.getOwnPropertyDescriptor(target, p)
+    //     }
+    // })
+	// debugger
+	// Object.defineProperty(proxy, 'name', {
+	// 	value: 'proxy'
+    // })
+	// console.log(proxy.name)
+    // let descriptor = Object.getOwnPropertyDescriptor(proxy, 'name')
+	// console.log(descriptor)
+	console.log('-------------apply和construct---------------')
+    // let target = function() {
+	// 	return 42
+    // }
+	// let proxy = new Proxy(target, {
+	// 	apply(target, thisArg, argArray) {
+	// 		return Reflect.apply(target, thisArg, argArray)
+	// 	},
+    //     construct(target, argArray, newTarget) {
+	// 		return Reflect.construct(target, argArray)
+    //     }
+	// })
+	// console.log(typeof  proxy)
+	// console.log(proxy())
+    // const instance = new proxy()
+	// console.log(instance instanceof proxy)
+	// console.log(instance instanceof  target)
+    //
+    //
+    // function sum(...values) {
+	// 	return values.reduce((previous, current) => previous + current, 0)
+    // }
+	// let sumProxy = new Proxy(sum, {
+	// 	// 函数执行一定会走这里
+	// 	apply(target, thisArg, argArray) {
+	// 		debugger
+	// 		argArray.forEach(arg => {
+	// 			if(typeof arg !== 'number') {
+	// 				throw new Error('All arguments must be numbers')
+    //             }
+    //         })
+    //         return Reflect.apply(target, thisArg, argArray)
+	// 	},
+    //     // 函数通过new 实例化一定会走这里
+    //     construct(target, argArray, newTarget) {
+	// 		throw new TypeError('This function can\'t be called with new')
+    //     }
+	// })
+	// console.log(sumProxy(1,2,3,4))
+	// try {
+	// 	console.log(sumProxy(1,'2',3,4))
+    // }catch (e) {
+	// 	console.log(e)
+    // }
+	// try{
+	// 	let result = new sumProxy()
+    // }catch (e) {
+    //     console.error(e)
+	// }
+
+	console.log('------------------重写抽象基类的构造器')
+
+    // class AbstractNumbers{
+	// 	constructor(...values) {
+	// 		if(new.target === AbstractNumbers) {
+	// 			throw new TypeError('This function must be inherited from')
+    //         }
+	// 		this.values = values
+	// 	}
+    // }
+	// class Numbers extends AbstractNumbers {
+    //
+    // }
+	// const instance = new Numbers(1,2,3,4)
+	// console.log(instance.values)
+    // // 这里会抛出异常
+    // try{
+	//     new AbstractNumbers(1,2,3,4)
+    // }catch (e) {
+	// 	console.error(e)
+    // }
+    //
+	// console.log('可被调用的类构造器-----------------------')
+    //
+    // class Person {
+	// 	constructor(name) {
+	// 		this.name = name
+	// 	}
+    // }
+	// let PersonProxy = new Proxy(Person, {
+	// 	apply(trapTarget, thisArg, argumentsList) {
+	// 		return new trapTarget(...argumentsList)
+    //     }
+    // });
+	// let me = PersonProxy('Nicholas')
+	// console.log(me.name)
+	// console.log(me instanceof Person)
+	// console.log(me instanceof PersonProxy)
+
+	console.log('---------------------可被撤销的代理----------------------')
+
+    // let target = {
+	// 	name: 'target'
+    // }
+	// let {proxy, revoke} = Proxy.revocable(target, {})
+	// console.log(proxy.name)
+    // revoke()
+	// console.log(proxy.name)
+
+	console.log('set陷阱函数----------------------')
+
+    // let target = {}
+    // let thing = Object.create(new Proxy(target, {
+	// 	set(target, p, value, receiver) {
+	// 		return Reflect.set(target, p, value, receiver)
+	// 	}
+    // }))
+    // debugger
+	// console.log(thing.hasOwnProperty('name'))
+    // thing.name = 'thing'
+	// console.log(thing.name)
+	// console.log(thing.hasOwnProperty('name'))
+    // thing.name = 'boo'
+	// console.log(thing.name)
+    // thing.age = 32
+
+	console.log('has陷阱函数只有在原型链查找触及原型对象的时候才会被调用。当使用代理作为原型时，这只会在指定名称的自由属性不存在的时候发生')
+    // let target = {}
+    // let thing = Object.create(new Proxy(target, {
+	// 	has(trapTarget, key) {
+	// 		return Reflect.has(trapTarget, key)
+    //     }
+    // }))
+	// console.log('name' in thing)
+    // thing.name = 'thing'
+	// console.log('name' in thing)
+    // // age 在thing上不存在，所以会触发has陷阱函数
+	// console.log('age' in thing)
+
+
+    function NoSuchProperty() {
+    }
+	NoSuchProperty.prototype = new Proxy({}, {
+		// 代理的get方法，只有在属性不存在的时候，才会被触发
+		get(target, p, receiver) {
+			throw new ReferenceError(`${p} doesn't exist`)
+		}
+	})
+    let thing = new NoSuchProperty()
+    thing.intro = 'description'
+	console.log(thing.intro)
+    try{
+	    let result = thing.name
+    }catch (e) {
+		console.error(e)
+    }
+
+	class Square extends NoSuchProperty{
+		constructor(length, width) {
+			super();
+			this.length = length
+            this.width = width
+		}
+	}
+	let shape = new Square(2, 6)
+    let area1 = shape.length * shape.width
+	console.log(area1)
+    try{
+		// 由于这里width2是不存在的，所以这里会报错
+	    let area2 = shape.length * shape.width2
+    }catch (e) {
+        console.error(e)
+    }
+
+
+
+
+
+
+
+
+</script>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用模块封装代码</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="module">
+    import * as example from './module/example.js'
+    import './module/array.js'
+
+    console.log(example)
+
+    let colors = ['red', 'green', 'blue']
+    let items = []
+    items.push(colors)
+    console.log(items)
+</script>

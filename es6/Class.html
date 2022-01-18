@@ -59,4 +59,75 @@
   }())
   const element2 = new CustomHtmlElement2(document.getElementById('box'))
   console.log(element2)
+
+  class Collection {
+	  constructor() {
+		  this.items = []
+	  }
+	  *[Symbol.iterator]() {
+		  yield *this.items.values()
+      }
+	  push(item) {
+		  this.items.push(item)
+      }
+	  static sfn() {
+		  console.log('this is a static method')
+      }
+  }
+  const collection = new Collection()
+  collection.push('zhangsan')
+  collection.push('lisi')
+  collection.push('wangwu')
+
+  for (const item of collection) {
+	  console.log(item)
+  }
+  console.log(collection)
+  Collection.sfn()
+
+
+  console.log('继承-------------------')
+  class Rectangle{
+	  constructor(width, height) {
+		  console.log('new.target === Rectangle',new.target === Rectangle)
+		  this.width = width
+          this.height = height
+	  }
+	  getArea() {
+		  return this.width * this.height
+      }
+  }
+  class Square extends Rectangle {
+	  constructor(width, height) {
+		  super(width, height);
+	  }
+  }
+  let s = new Square(100,100)
+  console.log(s.getArea())
+  console.log(s instanceof Square)
+  console.log(s instanceof Rectangle)
+
+  // 创建一个静态的基类，用于判断
+  class Shape {
+	  constructor() {
+		  if(new.target === Shape) {
+			  throw  new Error('这个类是不能被实例化的')
+          }
+	  }
+  }
+  // 抛出异常
+  class Rectangle2 extends Shape {
+	  constructor(length, width) {
+		  super();
+		  this.length = length;
+		  this.width = width;
+	  }
+  }
+  // let shape = new Shape()
+
+  let r2 = new Rectangle2(20, 5)
+  console.log(r2 instanceof  Shape)
+
+
+
 </script>

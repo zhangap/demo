@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增强的数组类型</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+	// 以下代码会造成一个误区 new Array(2)本来只是想初始化一个默认值为2的数组，结果初始化了一个长度为2的数组，且数组值是undefined
+	const arr = new Array(2)
+	console.log(arr)
+	const arr2 = new Array(1, 2)
+	console.log(arr2)
+	// 基于以上出现的问题，就要求用新的方式来进行初始化
+	const arr3 = Array.of(2)
+	console.log(arr3)
+    const arr4 = Array.of(1,2)
+	console.log(arr4)
+
+    // Array.from 是把类数组转换为数组
+    const arrayLike = {
+		0:0,
+        1:1,
+        2:2,
+        length:3
+    }
+	console.log(Array.from(arrayLike))
+    // 初始化一个长度为100的数组，且每个数组的值为1
+	console.log(Array.from({length:100}, value => {
+		return 1
+	}))
+
+    function translate() {
+	    console.log([...arguments])
+		return Array.from(arguments)
+    }
+	console.log(translate(1,2,3,4))
+    // Array.from也可以把可迭代对象转换为数组
+    let numbers = {
+		*[Symbol.iterator]() {
+			yield 1;
+			yield 2;
+			yield 3;
+        }
+    }
+	let numbers2 = Array.from(numbers, value => value +1)
+	console.log(numbers2)
+
+    const numbers3 = [25, 30, 35,40,45]
+	console.log(numbers3.find(v => v> 33))
+	console.log(numbers3.findIndex(v => v > 33))
+</script>
